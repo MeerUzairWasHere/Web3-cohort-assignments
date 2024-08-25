@@ -1,0 +1,8 @@
+============================================================================
+pubkey: EVz8tUi4kFemN43T2wwdvYbf6GF5TapzoD6SpCSjU9AH
+============================================================================
+Save this seed phrase and your BIP39 passphrase to recover your new keypair:
+grief join produce entry kit offer finger advance dragon museum purse author
+============================================================================
+
+
