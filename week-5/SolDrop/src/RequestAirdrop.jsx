@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { toast } from "react-toastify";
@@ -37,9 +37,26 @@ export function RequestAirdrop() {
     }
   }
 
+  // Step 2: Create a function to fetch the balance
+  async function getBalance() {
+    if (wallet.publicKey) {
+      try {
+        const balance = await connection.getBalance(wallet.publicKey);
+        setBalance(balance / LAMPORTS_PER_SOL);
+      } catch (error) {
+        console.error("Failed to fetch balance:", error);
+      }
+    }
+  }
+
+  // Step 3: Use useEffect to call getBalance when the component mounts or wallet changes
+  useEffect(() => {
+    getBalance();
+  }, [balance, wallet.publicKey]);
+
   return (
     <div className="form">
-      <ShowSolBalance balance={balance} setBalance={setBalance} />
+      <ShowSolBalance balance={balance} />
       <div>
         <input
           value={amount}

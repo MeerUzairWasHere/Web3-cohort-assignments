@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import {
   LAMPORTS_PER_SOL,
@@ -8,13 +8,23 @@ import {
 } from "@solana/web3.js";
 import { toast } from "react-toastify";
 
-export function SendTokens({ balance, setBalance }) {
+export function SendTokens({ setBalance }) {
   const wallet = useWallet();
   const { connection } = useConnection();
 
   const [toAddress, setToAddress] = useState("");
   const [amount, setAmount] = useState("");
-
+  // Step 2: Create a function to fetch the balance
+  async function getBalance() {
+    if (wallet.publicKey) {
+      try {
+        const balance = await connection.getBalance(wallet.publicKey);
+        setBalance(balance / LAMPORTS_PER_SOL);
+      } catch (error) {
+        console.error("Failed to fetch balance:", error);
+      }
+    }
+  }
   async function sendTokens() {
     const transaction = new Transaction();
 
@@ -29,22 +39,10 @@ export function SendTokens({ balance, setBalance }) {
     try {
       await wallet.sendTransaction(transaction, connection);
       toast.success(`Sent ${amount} SOL to ${toAddress}`);
-      getBalance();
+      await getBalance();
     } catch (error) {
       console.log("file: SendTokens.jsx:33 - error:", error);
       toast.error("Transaction failed: " + error.message);
-    }
-  }
-
-  // Step 2: Create a function to fetch the balance
-  async function getBalance() {
-    if (wallet.publicKey) {
-      try {
-        const balance = await connection.getBalance(wallet.publicKey);
-        setBalance(balance / LAMPORTS_PER_SOL);
-      } catch (error) {
-        console.error("Failed to fetch balance:", error);
-      }
     }
   }
 
