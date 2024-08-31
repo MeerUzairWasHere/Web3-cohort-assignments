@@ -11,8 +11,7 @@ export function RequestAirdrop() {
   const { connection } = useConnection();
   const [amount, setAmount] = useState(1);
   const isConnected = wallet.connected;
-  const [balance, setBalance] = useState(null);
-
+  const [balance, setBalance] = useState(0);
   const handleChange = (e) => {
     setAmount(Number(e.target.value));
   };
@@ -51,8 +50,9 @@ export function RequestAirdrop() {
 
   // Step 3: Use useEffect to call getBalance when the component mounts or wallet changes
   useEffect(() => {
+    console.log("file: RequestAirdrop.jsx:61 - useEffect:");
     getBalance();
-  }, [balance, wallet.publicKey]);
+  }, [wallet.publicKey, balance]);
 
   return (
     <div className="form">

@@ -55,7 +55,7 @@ export function SendTokens({ setBalance }) {
         onChange={(e) => setToAddress(e.target.value)}
       />
       <input
-        type="text"
+        type="number"
         placeholder="Amount"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
