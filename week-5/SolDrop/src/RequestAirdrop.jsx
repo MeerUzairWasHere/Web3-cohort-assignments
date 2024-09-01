@@ -30,6 +30,7 @@ export function RequestAirdrop() {
       toast.success(
         `Airdropped ${amount} SOL to ${wallet.publicKey.toBase58()}`
       );
+      getBalance();
     } catch (error) {
       console.error("Error requesting airdrop:", error);
       toast.error("Failed to request airdrop. Try again later.");
