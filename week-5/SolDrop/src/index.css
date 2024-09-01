@@ -85,3 +85,17 @@ h1,h2,h3,h4,h5,h6,p,span{
   button{
     cursor: pointer;
   }
+
+@media only screen and (max-width: 768px) {
+  .container{
+    flex-direction: column-reverse;
+  }
+  .two{
+    width: 90%;
+  }
+  .flex-wrap{
+    flex-wrap: wrap;
+    gap:1rem;
+  }
+}
+  

@@ -47,7 +47,7 @@ export function SendTokens({ setBalance }) {
   }
 
   return (
-    <div>
+    <div className="flex-wrap">
       <input
         type="text"
         placeholder="To"
