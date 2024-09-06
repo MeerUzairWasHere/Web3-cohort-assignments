@@ -118,6 +118,7 @@ export function TokenLaunchpad() {
 
     await wallet.sendTransaction(transaction3, connection);
     alert(`Token mint created at ${mintKeypair.publicKey.toBase58()}`);
+    alert("Minted!");
   }
 
   return (
