@@ -24,6 +24,7 @@ export function TokenLaunchpad() {
   async function createToken() {
     const name = document.getElementById("name").value;
     const symbol = document.getElementById("symbol").value;
+    const initialSupply = document.getElementById("initialSupply").value;
     const mintKeypair = Keypair.generate();
     const metadata = {
       mint: mintKeypair.publicKey,
@@ -110,7 +111,7 @@ export function TokenLaunchpad() {
         mintKeypair.publicKey,
         associatedToken,
         wallet.publicKey,
-        1000000000,
+        Number(initialSupply) * 1000000000,
         [],
         TOKEN_2022_PROGRAM_ID
       )
@@ -118,7 +119,6 @@ export function TokenLaunchpad() {
 
     await wallet.sendTransaction(transaction3, connection);
     alert(`Token mint created at ${mintKeypair.publicKey.toBase58()}`);
-    alert("Minted!");
   }
 
   return (
