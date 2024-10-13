@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowDownUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,13 +16,55 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { PublicKey } from "@solana/web3.js";
+import {
+  getRaydiumQuote,
+  SOL_MINT,
+  SOL_TOKEN_PROGRAM_ID,
+  USDC_MINT,
+} from "@/lib/actions";
+import { API_URLS } from "@raydium-io/raydium-sdk-v2";
 
 export function Swapper() {
+  const { connection } = useConnection(); // Solana connection
+  const { publicKey } = useWallet(); // Wallet publicKey
   const [fromToken, setFromToken] = useState("ETH");
   const [toToken, setToToken] = useState("USDC");
   const [fromAmount, setFromAmount] = useState("");
   const [toAmount, setToAmount] = useState("");
+  const [tokens, setTokens] = useState<any[]>([]); // State to store token accounts
 
+  useEffect(() => {
+    if (!publicKey) return;
+    // Fetch all tokens for the connected wallet
+    const fetchSolanaTokens = async () => {
+      try {
+        const solanaTokenAccounts =
+          await connection.getParsedTokenAccountsByOwner(publicKey, {
+            programId: new PublicKey(SOL_TOKEN_PROGRAM_ID),
+          });
+        // Extract tokens and balances
+        const tokenList = solanaTokenAccounts.value.map((accountInfo) => {
+          const accountData = accountInfo.account.data.parsed.info;
+          return {
+            mint: accountData.mint,
+            tokenAmount: accountData.tokenAmount.uiAmount,
+          };
+        });
+        console.log(tokenList);
+        setTokens(tokenList); // Store token data in state
+      } catch (error) {
+        console.error("Error fetching token accounts:", error);
+      }
+    };
+    async function get() {
+      const res = await getRaydiumQuote(100000000, SOL_MINT, USDC_MINT);
+      console.log(res);
+    }
+    get();
+    fetchSolanaTokens();
+  }, [connection, publicKey]);
   const handleSwap = () => {
     // Placeholder for swap logic
     console.log(`Swapping ${fromAmount} ${fromToken} to ${toToken}`);
