@@ -21,35 +21,3 @@ interface RaydiumQuote {
 interface SwapResponse {
   transaction: string;
 }
-
-export const getRaydiumQuote = async (
-  amountIn: number,
-  inputMint: string,
-  outputMint: string
-): Promise<RaydiumQuote | undefined> => {
-  try {
-    const response = await axios.get<RaydiumQuote>(
-      `${RAYDIUM_QUOTE_URL}?inputMint=${inputMint}&outputMint=${outputMint}&amount=${amountIn}&slippageBps=50`
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching quote from Raydium:", error);
-  }
-};
-
-export const executeRaydiumSwap = async (swapParams: {
-  userPublicKey: string;
-  amountIn: number;
-  inputMint: string;
-  outputMint: string;
-}): Promise<SwapResponse | undefined> => {
-  try {
-    const response = await axios.post<SwapResponse>(
-      RAYDIUM_SWAP_URL,
-      swapParams
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Error executing Raydium swap:", error);
-  }
-};
