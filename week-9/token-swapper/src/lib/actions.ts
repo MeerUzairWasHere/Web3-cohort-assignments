@@ -1,5 +1,5 @@
-// import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-// import { Transaction } from "@solana/web3.js";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { Transaction } from "@solana/web3.js";
 import axios from "axios";
 
 export const SOL_TOKEN_PROGRAM_ID =
