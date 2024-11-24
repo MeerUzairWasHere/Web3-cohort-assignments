@@ -54,7 +54,7 @@ const startServer = async () => {
       } else {
         let myAccountData = data?.accountData?.find(
           (account: any) =>
-            account.account === "8mSftUkCcRVL2ht2JvNRXMNo87Xk6tSMnokZvkT6ZfLH"
+            account.account === "5ULzT7wyU4TqB62mVgp7ccUarnB1n9bS9cHjZJ4UT21n"
         );
         console.log({ myAccountData });
         if (myAccountData) {
