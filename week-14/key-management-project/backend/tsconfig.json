@@ -3,15 +3,14 @@
     "strict": null,
     "esModuleInterop": true,
     "noImplicitAny": false,
-  
     "skipLibCheck": true,
     "outDir": "./dist",
     "rootDir": "./src",
     "lib": ["ES2016", "DOM"],
     "forceConsistentCasingInFileNames": true,
     "typeRoots": ["node_modules/@types", "src/types"],
-    "module": "ESNext",  // Or "ES2020" or "Node16"
-    "target": "ESNext",   // Make sure to target an ES version that supports import.meta
+    "module": "ES2020",  // Or "ES2020" or "Node16"
+    "target": "ES2020",   // Make sure to target an ES version that supports import.meta
     "moduleResolution": "Node"
   },
   "include": ["src/**/*"]
