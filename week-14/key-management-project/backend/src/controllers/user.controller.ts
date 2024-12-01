@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import { Request, Response } from "express";
-import { UnauthenticatedError } from "../errors";
+import { UnauthenticatedError } from "../errors/index";
 import {
   createTokenUser,
   attachCookiesToResponse,
@@ -8,7 +8,7 @@ import {
   hashPassword,
 } from "../utils";
 
-import { prismaClient } from "../db";
+import { prismaClient } from "../db/index";
 
 export const showCurrentUser = async (req: Request, res: Response) => {
   const wallet = await prismaClient.wallet.findFirst({

@@ -8,7 +8,7 @@ import helmet from "helmet";
 import rateLimiter from "express-rate-limit";
 import cors from "cors";
 
-import { prismaClient } from "./db";
+import { prismaClient } from "./db/index";
 import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { BadRequestError, UnauthenticatedError } from "../errors";
+import { BadRequestError, UnauthenticatedError } from "../errors/index";
 import { randomBytes } from "crypto";
 
 import {
