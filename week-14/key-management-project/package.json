@@ -5,7 +5,9 @@
   "scripts": {
     "client": "cd frontend && npm run dev",
     "server": "cd backend && npm run dev",
-    "dev": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\""
+    "dev": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\"",
+    "production": "cd backend && npm i && tsc && cd ../frontend && npm i && npm run build",
+    "start": "cd backend && node ./dist/index.js"
   },
   "keywords": [],
   "author": "",
