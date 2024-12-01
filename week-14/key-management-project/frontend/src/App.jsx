@@ -1,51 +1,59 @@
-import axios from "axios";
-import "./App.css";
 import {
-  Transaction,
-  Connection,
-  PublicKey,
-  SystemProgram,
-  LAMPORTS_PER_SOL,
-} from "@solana/web3.js";
+  createBrowserRouter,
+  RouterProvider,
+  redirect,
+} from "react-router-dom";
+import SignUp from "./components/SignUp";
+import SignIn from "./components/SignIn";
+import Transaction from "./components/Transaction";
+import PagesLayout from "./components/PagesLayout";
 
-const connection = new Connection("https://api.devnet.solana.com");
-const fromPubkey = new PublicKey(
-  "5ULzT7wyU4TqB62mVgp7ccUarnB1n9bS9cHjZJ4UT21n"
-);
-function App() {
-  async function sendSol() {
-    const ix = SystemProgram.transfer({
-      fromPubkey: fromPubkey,
-      toPubkey: new PublicKey("BNkMidcxr1wCjqfJZnCnRVLuhFws8f2EnKQokPD7fLhR"),
-      lamports: 0.01 * LAMPORTS_PER_SOL,
-    });
-    const tx = new Transaction().add(ix);
+import { loader as PagesLayoutLoader } from "./components/PagesLayout";
+import customFetch from "./utils/customFetch";
 
-    const { blockhash } = await connection.getLatestBlockhash();
-    tx.recentBlockhash = blockhash;
-    tx.feePayer = fromPubkey;
-
-    // convert the transaction to a bunch of bytes
-    const serializedTx = tx.serialize({
-      requireAllSignatures: false,
-      verifySignatures: false,
-    });
-
-    console.log(serializedTx);
-
-    await axios.post("http://localhost:3000/api/v1/txn/sign", {
-      message: serializedTx,
-      retry: false,
-    });
+export const signUpAction = async ({ request }) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  try {
+    await customFetch.post("/auth/register", data);
+    console.log("User registered");
+    return redirect("/signin");
+  } catch (error) {
+    console.log(error);
+    return redirect("/signin");
   }
+};
 
-  return (
-    <div>
-      <input type="text" placeholder="Amount"></input>
-      <input type="text" placeholder="Address"></input>
-      <button onClick={sendSol}>Submit</button>
-    </div>
-  );
-}
+// Loader and action for Sign In
+const signInAction = async ({ request }) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  try {
+    await customFetch.post("/auth/login", data);
+    console.log("User logged in");
+    return redirect("/transaction");
+  } catch (error) {
+    console.log(error);
+    return redirect("/signin");
+  }
+};
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <PagesLayout />,
+    loader: PagesLayoutLoader,
+    children: [
+      { path: "/signup", element: <SignUp />, action: signUpAction },
+      { path: "/signin", element: <SignIn />, action: signInAction },
+      {
+        path: "/transaction",
+        element: <Transaction />,
+      },
+    ],
+  },
+]);
+
+const App = () => <RouterProvider router={router} />;
 
 export default App;
