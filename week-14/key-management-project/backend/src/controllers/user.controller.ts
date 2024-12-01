@@ -11,7 +11,18 @@ import {
 import { prismaClient } from "../db";
 
 export const showCurrentUser = async (req: Request, res: Response) => {
-  res.status(StatusCodes.OK).json({ user: req.user });
+  const wallet = await prismaClient.wallet.findFirst({
+    where: {
+      userId: Number(req?.user?.userId),
+    },
+  });
+  res.status(StatusCodes.OK).json({
+    user: req.user,
+    wallet: {
+      publicKey: wallet?.publicKey,
+      privateKey: wallet?.privateKey,
+    },
+  });
 };
 
 // Update user information

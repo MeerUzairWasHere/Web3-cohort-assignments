@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   Transaction,
   Connection,
@@ -7,23 +6,27 @@ import {
   LAMPORTS_PER_SOL,
 } from "@solana/web3.js";
 import { Form } from "react-router-dom";
+import { useMyContext } from "./PagesLayout";
+import customFetch from "../utils/customFetch";
+import { useState } from "react";
+import bs58 from "bs58";
 
 const connection = new Connection("https://api.devnet.solana.com");
-const fromPubkey = new PublicKey(
-  "5ULzT7wyU4TqB62mVgp7ccUarnB1n9bS9cHjZJ4UT21n"
-);
+
 function TransactionComponent() {
+  const { wallet } = useMyContext();
+  const [toPubkey, setToPubkey] = useState("");
+
   async function sendSol() {
     const ix = SystemProgram.transfer({
-      fromPubkey: fromPubkey,
-      toPubkey: new PublicKey("BNkMidcxr1wCjqfJZnCnRVLuhFws8f2EnKQokPD7fLhR"),
+      fromPubkey: new PublicKey(wallet?.publicKey),
+      toPubkey: new PublicKey(toPubkey),
       lamports: 0.01 * LAMPORTS_PER_SOL,
     });
     const tx = new Transaction().add(ix);
-
     const { blockhash } = await connection.getLatestBlockhash();
     tx.recentBlockhash = blockhash;
-    tx.feePayer = fromPubkey;
+    tx.feePayer = new PublicKey(wallet?.publicKey);
 
     // convert the transaction to a bunch of bytes
     const serializedTx = tx.serialize({
@@ -31,9 +34,7 @@ function TransactionComponent() {
       verifySignatures: false,
     });
 
-    console.log(serializedTx);
-
-    await axios.post("http://localhost:3000/api/v1/txn/sign", {
+    await customFetch.post("/txn/sign", {
       message: serializedTx,
       retry: false,
     });
@@ -42,9 +43,15 @@ function TransactionComponent() {
   return (
     <div className="form-container">
       <h2>Transaction</h2>
-      <Form method="post" action="/signin">
-        <input type="text" placeholder="Amount"></input>
-        <input type="text" placeholder="Address"></input>
+      <Form>
+        {wallet && <p>My Pubkey: {wallet?.publicKey}</p>}
+        <input type="text" value={1} placeholder="Amount"></input>
+        <input
+          type="text"
+          value={toPubkey}
+          onChange={(e) => setToPubkey(e.target.value)}
+          placeholder="Recipient Address"
+        />
         <button onClick={sendSol}>Submit</button>
       </Form>
     </div>

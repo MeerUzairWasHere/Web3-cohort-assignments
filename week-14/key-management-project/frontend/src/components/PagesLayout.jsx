@@ -4,6 +4,7 @@ import {
   useNavigation,
   ScrollRestoration,
   redirect,
+  Form,
 } from "react-router-dom";
 import customFetch from "../utils/customFetch";
 import { createContext, useContext } from "react";
@@ -14,7 +15,6 @@ export const loader = async () => {
     redirect("/transaction");
     return data;
   } catch (error) {
-    redirect("/signin");
     return error;
   }
 };
@@ -24,19 +24,26 @@ const myContext = createContext();
 const PagesLayout = () => {
   const navigation = useNavigation();
   const isPageLoading = navigation.state === "loading";
-  const { user } = useLoaderData();
+  const { user, wallet } = useLoaderData();
 
   return (
-    <myContext.Provider value={{ user }}>
+    <myContext.Provider value={{ user, wallet }}>
       <header className="navbar">
         <h1>My App</h1>
         <nav>
           <ul>
-            {!user && (
+            {!user ? (
               <li>
                 <a href="/signin">Sign In</a>
               </li>
+            ) : (
+              <li>
+                <Form method="post" action={`/logout`}>
+                  <button type="submit">Logout</button>
+                </Form>
+              </li>
             )}
+
             {!user && (
               <li>
                 <a href="/signup">Sign Up</a>
