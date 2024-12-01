@@ -5,14 +5,13 @@ import { randomBytes } from "crypto";
 
 import {
   hashString,
-  sendResetPasswordEmail,
-  // sendVerificationEmail,
   createTokenUser,
   attachCookiesToResponse,
 } from "../utils";
 
 import { comparePassword, hashPassword } from "../utils/passwordUtils";
 import { prismaClient } from "../db";
+import { Keypair } from "@solana/web3.js";
 
 export const registerUser = async (
   req: Request,
@@ -38,6 +37,15 @@ export const registerUser = async (
       verificationToken,
     },
   });
+  const keypair = new Keypair();
+
+  const wallet = await prismaClient.wallet.create({
+    data: {
+      userId: user?.id,
+      publicKey: keypair.publicKey.toString(),
+      privateKey: keypair.secretKey.toString(),
+    },
+  });
 
   //   const origin = "http://localhost:5000";
 
@@ -51,6 +59,7 @@ export const registerUser = async (
   res.status(StatusCodes.CREATED).json({
     msg: "User created successfully",
     user,
+    wallet,
   });
 };
 

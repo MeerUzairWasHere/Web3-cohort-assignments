@@ -27,7 +27,7 @@ model User {
   createdAt                   DateTime  @default(now())
   updatedAt                   DateTime  @updatedAt
   Token                       Token[]
-  Txn                         Txn[]
+  wallet                      Wallet[]
 }
 
 model Token {
@@ -42,10 +42,12 @@ model Token {
   updatedAt    DateTime @updatedAt
 }
 
-model Txn {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Wallet {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  publicKey  String   @unique
+  privateKey String
+  user       User     @relation(fields: [userId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }

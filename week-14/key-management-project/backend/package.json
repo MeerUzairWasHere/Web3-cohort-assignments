@@ -24,6 +24,7 @@
   "homepage": "https://github.com/MeerUzairWasHere/TypePEN#readme",
   "dependencies": {
     "@prisma/client": "^5.22.0",
+    "@solana/web3.js": "^1.95.5",
     "@types/bcryptjs": "^2.4.6",
     "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.17",
@@ -35,6 +36,7 @@
     "@types/nodemailer": "^6.4.17",
     "@types/swagger-ui-express": "^4.1.7",
     "bcryptjs": "^2.4.3",
+    "bs58": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "datauri": "^4.1.0",
