@@ -12,7 +12,7 @@ import { prismaClient } from "./db";
 import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 import swaggerUi from "swagger-ui-express";
-import { openApiSpec } from "./openApiSpec";
+
 // Routers
 import authRouter from "./routes/auth.routes";
 import userRouter from "./routes/user.routes";
@@ -58,13 +58,6 @@ app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ msg: "working successfully!" });
 });
 
-// Remove this in production
-// app.use("/documentation", swaggerUi.serve, swaggerUi.setup(openApiSpec));
-
-// app.get("*", (req, res) => {
-//   res.redirect("/documentation");
-// });
-
 // Serve static files in production
 // Uncomment the below line if you have a frontend to serve in production
 // app.get("*", (req: Request, res: Response) => {
@@ -82,6 +75,7 @@ const port = process.env.PORT || 3000;
 const startServer = async () => {
   try {
     await prismaClient.$connect();
+    console.log("Connected to the database successfully.");
     app.listen(port, () => {
       console.log(`Server is listening on http://localhost:${port}/...`);
     });
