@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "strict": true,
+    "strict": null,
     "esModuleInterop": true,
     "noImplicitAny": false,
+  
     "skipLibCheck": true,
     "outDir": "./dist",
     "rootDir": "./src",
