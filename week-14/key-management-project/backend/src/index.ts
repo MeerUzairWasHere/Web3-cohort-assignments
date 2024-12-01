@@ -33,7 +33,6 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
-// @ts-ignore
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 app.use(express.static(resolve(__dirname, "./frontend/dist"))); // Uncomment if you have a frontend

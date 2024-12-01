@@ -1,16 +1,17 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
     "noImplicitAny": false,
     "skipLibCheck": true,
-    "target": "ES2016",
     "outDir": "./dist",
     "rootDir": "./src",
     "lib": ["ES2016", "DOM"],
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["node_modules/@types", "src/types"]
+    "typeRoots": ["node_modules/@types", "src/types"],
+    "module": "ESNext",  // Or "ES2020" or "Node16"
+    "target": "ESNext",   // Make sure to target an ES version that supports import.meta
+    "moduleResolution": "Node"
   },
   "include": ["src/**/*"]
 }
