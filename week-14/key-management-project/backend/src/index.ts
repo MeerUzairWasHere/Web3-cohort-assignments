@@ -16,6 +16,7 @@ import { openApiSpec } from "./openApiSpec";
 // Routers
 import authRouter from "./routes/auth.routes";
 import userRouter from "./routes/user.routes";
+import txnRouter from "./routes/txn.routes";
 
 // Middleware
 import notFoundMiddleware from "./middlewares/not-found";
@@ -51,10 +52,12 @@ app.use(cors());
 // Routes
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/txn", txnRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ msg: "working successfully!" });
 });
+
 // Remove this in production
 // app.use("/documentation", swaggerUi.serve, swaggerUi.setup(openApiSpec));
 
