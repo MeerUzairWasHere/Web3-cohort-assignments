@@ -11,7 +11,6 @@ import cors from "cors";
 import { prismaClient } from "./db";
 import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
-import swaggerUi from "swagger-ui-express";
 
 // Routers
 import authRouter from "./routes/auth.routes";
@@ -21,8 +20,6 @@ import txnRouter from "./routes/txn.routes";
 // Middleware
 import notFoundMiddleware from "./middlewares/not-found";
 import errorHandlerMiddleware from "./middlewares/error-handler";
-
-// const __dirname = dirname(fileURLToPath(import.meta.url)); // Uncomment if you have a frontend
 
 // Initialize Express app
 const app = express();
@@ -36,16 +33,19 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
-// app.use(express.static(resolve(__dirname, "./client/dist"))); // Uncomment if you have a frontend
+// @ts-ignore
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+app.use(express.static(resolve(__dirname, "./frontend/dist"))); // Uncomment if you have a frontend
 
 // Security
 app.set("trust proxy", 1);
-// app.use(
-//   rateLimiter({
-//     windowMs: 15 * 60 * 1000,
-//     max: 60,
-//   })
-// );
+app.use(
+  rateLimiter({
+    windowMs: 15 * 60 * 1000,
+    max: 60,
+  })
+);
 app.use(helmet());
 app.use(cors());
 
@@ -54,15 +54,11 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/txn", txnRouter);
 
-app.get("/", (req: Request, res: Response) => {
-  res.status(200).json({ msg: "working successfully!" });
-});
-
 // Serve static files in production
 // Uncomment the below line if you have a frontend to serve in production
-// app.get("*", (req: Request, res: Response) => {
-//     res.sendFile(resolve(__dirname, "./client/dist", "index.html"));
-// });
+app.get("*", (req: Request, res: Response) => {
+  res.sendFile(resolve(__dirname, "./frontend/dist", "index.html"));
+});
 
 // Error handling
 app.use(notFoundMiddleware);
