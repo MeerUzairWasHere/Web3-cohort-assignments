@@ -38,8 +38,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-app.use(express.static(resolve(__dirname, "./frontend/dist"))); // Uncomment if you have a frontend
-
+app.use(express.static(resolve(__dirname, "../../frontend/dist"))); // Uncomment if you have a frontend
 // Security
 app.set("trust proxy", 1);
 app.use(
@@ -59,7 +58,7 @@ app.use("/api/v1/txn", txnRouter);
 // Serve static files in production
 // Uncomment the below line if you have a frontend to serve in production
 app.get("*", (req: Request, res: Response) => {
-  res.sendFile(resolve(__dirname, "./frontend/dist", "index.html"));
+  res.sendFile(resolve(__dirname, "../../frontend/dist", "index.html"));
 });
 
 // Error handling
