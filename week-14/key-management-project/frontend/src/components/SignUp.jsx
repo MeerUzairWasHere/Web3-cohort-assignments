@@ -1,5 +1,5 @@
 import React from "react";
-import { Form } from "react-router-dom";
+import { Form, redirect } from "react-router-dom";
 import customFetch from "../utils/customFetch";
 
 export const action = async ({ request }) => {
@@ -8,6 +8,7 @@ export const action = async ({ request }) => {
   try {
     await customFetch.post("/auth/register", data);
     console.log("User registered");
+    redirect("/signin");
   } catch (error) {
     console.log(error);
   }

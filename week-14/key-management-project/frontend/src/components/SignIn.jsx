@@ -1,5 +1,5 @@
 import React from "react";
-import { Form } from "react-router-dom";
+import { Form, redirect } from "react-router-dom";
 import customFetch from "../utils/customFetch";
 
 export const action = async ({ request }) => {
@@ -7,6 +7,7 @@ export const action = async ({ request }) => {
   const data = Object.fromEntries(formData);
   try {
     await customFetch.post("/auth/login", data);
+    redirect("/transaction")
   } catch (error) {
     console.log(error);
   }
