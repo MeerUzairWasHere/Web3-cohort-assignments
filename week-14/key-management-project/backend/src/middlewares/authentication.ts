@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { UnauthenticatedError, UnauthorizedError } from "../errors";
+import { UnauthenticatedError, UnauthorizedError } from "../errors/index.js";
 import { attachCookiesToResponse, isTokenValid } from "../utils/index.js";
-import { prismaClient } from "../db";
+import { prismaClient } from "../index.js";
 
 // Middleware to authenticate a user
 export const authenticateUser = async (

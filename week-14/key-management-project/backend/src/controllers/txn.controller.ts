@@ -1,10 +1,9 @@
 import { StatusCodes } from "http-status-codes";
 import { Request, Response } from "express";
 import { Connection, Keypair, PublicKey, Transaction } from "@solana/web3.js";
-import { prismaClient } from "../db/index";
+import { prismaClient } from "../index.js";
 
 const connection = new Connection("https://api.devnet.solana.com");
-
 
 export const sign = async (req: Request, res: Response) => {
   const serializedTransaction = req.body.message;

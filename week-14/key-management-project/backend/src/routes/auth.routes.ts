@@ -1,14 +1,13 @@
 import { Router } from "express";
 import { Request, Response, NextFunction } from "express";
-
-import { authenticateUser } from "../middlewares/authentication";
+import { authenticateUser } from "../middlewares/authentication.js";
 
 import {
   validateRegisterInput,
   validateLoginInput,
-} from "../middlewares/validationMiddleware";
+} from "../middlewares/validationMiddleware.js";
 
-import { registerUser, login, logout } from "../controllers/auth.controller";
+import { registerUser, login, logout } from "../controllers/auth.controller.js";
 
 const router = Router();
 

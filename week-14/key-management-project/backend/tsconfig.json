@@ -1,17 +1,34 @@
+// {
+//   "compilerOptions": {
+//     "strict": null,
+//     "esModuleInterop": true,
+//     "noImplicitAny": false,
+//     "skipLibCheck": true,
+//     "outDir": "./dist",
+//     "rootDir": "./src",
+//     "lib": ["ES2016", "DOM"],
+//     "forceConsistentCasingInFileNames": true,
+//     "typeRoots": ["node_modules/@types", "src/types"],
+//     "module": "ESNext",  // Or "ES2020" or "Node16"
+//     "target": "ES6",   // Make sure to target an ES version that supports import.meta
+//     "moduleResolution": "Node"
+//   },
+//   "include": ["src/**/*"]
+// }
+// 
 {
   "compilerOptions": {
-    "strict": null,
-    "esModuleInterop": true,
-    "noImplicitAny": false,
-    "skipLibCheck": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "lib": ["ES2016", "DOM"],
+    "module": "ESNext", // Ensures ES Modules are used
+    "target": "ESNext", // Modern JavaScript syntax for compatibility
+    "outDir": "./dist", // Outputs compiled files to 'dist' folder
+    "rootDir": "./src", // Specifies the source directory
+    "moduleResolution": "node", // Resolves modules like Node.js
+    "esModuleInterop": true, // Allows default imports for CommonJS modules
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["node_modules/@types", "src/types"],
-    "module": "ESNext",  // Or "ES2020" or "Node16"
-    "target": "ES6",   // Make sure to target an ES version that supports import.meta
-    "moduleResolution": "Node"
+    "strict": true,
+    "skipLibCheck": true
   },
-  "include": ["src/**/*"]
+  "include": ["src"], // Specifies the source files to compile
+  "exclude": ["node_modules", "dist"] // Excludes these directories
 }
+    

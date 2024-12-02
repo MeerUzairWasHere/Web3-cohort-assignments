@@ -1,7 +1,7 @@
 import { body, validationResult, ValidationChain } from "express-validator";
 import { Request, Response, NextFunction } from "express";
-import { BadRequestError, UnauthorizedError } from "../errors";
-import { prismaClient } from "../db";
+import { BadRequestError, UnauthorizedError } from "../errors/index.js";
+import { prismaClient } from "../index.js";
 
 // Utility function to handle validation errors
 const withValidationErrors = (validateValues: ValidationChain[]) => {

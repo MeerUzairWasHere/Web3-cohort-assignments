@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { BadRequestError, UnauthenticatedError } from "../errors/index";
+import { BadRequestError, UnauthenticatedError } from "../errors/index.js";
 import { randomBytes } from "crypto";
 
 import {
   hashString,
   createTokenUser,
   attachCookiesToResponse,
-} from "../utils";
+} from "../utils/index.js";
 
-import { comparePassword, hashPassword } from "../utils/passwordUtils";
-import { prismaClient } from "../db";
+import { comparePassword, hashPassword } from "../utils/passwordUtils.js";
+import { prismaClient } from "../index.js";
 import { Keypair } from "@solana/web3.js";
 
 export const registerUser = async (

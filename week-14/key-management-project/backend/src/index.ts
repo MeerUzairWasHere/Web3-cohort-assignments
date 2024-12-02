@@ -1,25 +1,28 @@
 import dotenv from "dotenv";
 dotenv.config();
 import "express-async-errors";
-import express, { Request, Response, NextFunction } from "express";
+import express, { Request, Response } from "express";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import rateLimiter from "express-rate-limit";
 import cors from "cors";
+import { PrismaClient } from "@prisma/client";
 
-import { prismaClient } from "./db/index";
 import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 
 // Routers
-import authRouter from "./routes/auth.routes";
-import userRouter from "./routes/user.routes";
-import txnRouter from "./routes/txn.routes";
+
+import authRouter from "./routes/auth.routes.js";
+import userRouter from "./routes/user.routes.js";
+import txnRouter from "./routes/txn.routes.js";
 
 // Middleware
-import notFoundMiddleware from "./middlewares/not-found";
-import errorHandlerMiddleware from "./middlewares/error-handler";
+import notFoundMiddleware from "./middlewares/not-found.js";
+import errorHandlerMiddleware from "./middlewares/error-handler.js";
+
+export const prismaClient = new PrismaClient();
 
 // Initialize Express app
 const app = express();

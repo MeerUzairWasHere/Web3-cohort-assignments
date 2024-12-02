@@ -1,14 +1,14 @@
 import { StatusCodes } from "http-status-codes";
 import { Request, Response } from "express";
-import { UnauthenticatedError } from "../errors/index";
+import { UnauthenticatedError } from "../errors/index.js";
 import {
   createTokenUser,
   attachCookiesToResponse,
   comparePassword,
   hashPassword,
-} from "../utils";
+} from "../utils/index.js";
 
-import { prismaClient } from "../db/index";
+import { prismaClient } from "../index.js";
 
 export const showCurrentUser = async (req: Request, res: Response) => {
   const wallet = await prismaClient.wallet.findFirst({

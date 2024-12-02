@@ -1,17 +1,17 @@
 import { NextFunction, Router, Request, Response } from "express";
-import { authenticateUser } from "../middlewares/authentication";
+import { authenticateUser } from "../middlewares/authentication.js";
 import {
   showCurrentUser,
   updateUser,
   updateUserPassword,
-} from "../controllers/user.controller";
+} from "../controllers/user.controller.js";
 
 const router = Router();
 
 import {
   validateUpdateUserInput,
   validateUpdatePasswordInput,
-} from "../middlewares/validationMiddleware";
+} from "../middlewares/validationMiddleware.js";
 
 router.route("/current-user").get(
   (req: Request, res: Response, next: NextFunction) =>

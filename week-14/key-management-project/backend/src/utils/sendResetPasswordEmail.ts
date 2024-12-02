@@ -1,4 +1,4 @@
-import { sendEmail } from "./sendEmail";
+import { sendEmail } from "./sendEmail.js";
 
 interface ResetPasswordEmailParams {
   name: string;

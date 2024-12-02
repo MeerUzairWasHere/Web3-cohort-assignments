@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { UnauthenticatedError, UnauthorizedError } from "../errors";
-import { isTokenValid } from "../utils";
+import { UnauthenticatedError, UnauthorizedError } from "../errors/index.js";
+import { isTokenValid } from "../utils/index.js";
 
 export const authenticateUser = async (
   req: Request,

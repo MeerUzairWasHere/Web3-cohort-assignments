@@ -1,4 +1,4 @@
-import { UnauthorizedError } from "../errors";
+import { UnauthorizedError } from "../errors/index.js";
 
 interface RequestUser {
   role: string;

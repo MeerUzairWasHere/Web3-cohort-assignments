@@ -1,6 +1,6 @@
 import { NextFunction, Router, Request, Response } from "express";
-import { authenticateUser } from "../middlewares/authentication";
-import { status, sign } from "../controllers/txn.controller";
+import { authenticateUser } from "../middlewares/authentication.js";
+import { status, sign } from "../controllers/txn.controller.js";
 
 const router = Router();
 
