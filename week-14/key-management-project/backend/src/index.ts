@@ -50,6 +50,7 @@ app.use(
 app.use(
   helmet.contentSecurityPolicy({
     useDefaults: true,
+    
     directives: {
       "img-src": [
         "'self'",
@@ -61,7 +62,11 @@ app.use(
     reportOnly: false,
   })
 );
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 // Routes
 app.use("/api/v1/auth", authRouter);
