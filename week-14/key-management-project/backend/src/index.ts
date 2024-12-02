@@ -4,7 +4,6 @@ import "express-async-errors";
 import express, { Request, Response } from "express";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
-import helmet from "helmet";
 import rateLimiter from "express-rate-limit";
 import cors from "cors";
 import { PrismaClient } from "@prisma/client";
@@ -47,21 +46,7 @@ app.use(
     max: 60,
   })
 );
-app.use(
-  helmet.contentSecurityPolicy({
-    useDefaults: true,
-    
-    directives: {
-      "img-src": [
-        "'self'",
-        "data:",
-        "https://www.google-analytics.com",
-        "https://api.devnet.solana.com",
-      ],
-    },
-    reportOnly: false,
-  })
-);
+
 app.use(
   cors({
     origin: "*",
