@@ -10,6 +10,8 @@ This repository contains all the assignments and projects completed as part of t
 
 - [Token Launchpad - dApp](https://token-launchpad-meeruzairwashere.netlify.app/)
 
+- [Cloud Wallet](https://cloud-wallet.onrender.com)
+
 ## Slides
 
 - **Week 1**: [Web3 Orientation](https://projects.100xdevs.com/tracks/web3-orientation/Web3-Cohort---Orientation-1)
@@ -38,7 +40,7 @@ This repository contains all the assignments and projects completed as part of t
 
 - **Week 11**: [ETH on the Frontend](https://petal-estimate-4e9.notion.site/ETH-on-the-frontend-1227dfd107358015bb15e3e87367db55)
 
-- **Week 12**: [DEXs Funding](https://petal-estimate-4e9.notion.site/DEXs-funding-1297dfd107358026b8d1c232caf6dbcd)  
+- **Week 12**: [DEXs Funding](https://petal-estimate-4e9.notion.site/DEXs-funding-1297dfd107358026b8d1c232caf6dbcd)
 
 - **Week 13**: [Week 13 Canva Link](https://www.canva.com/design/DAGVOvVE1ow/wTKvuP2OnyLuvr4aAwtM-A/edit)
 
