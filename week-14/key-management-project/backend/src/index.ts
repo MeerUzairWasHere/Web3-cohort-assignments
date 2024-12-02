@@ -47,7 +47,20 @@ app.use(
     max: 60,
   })
 );
-app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      "img-src": [
+        "'self'",
+        "data:",
+        "https://www.google-analytics.com",
+        "https://api.devnet.solana.com",
+      ],
+    },
+    reportOnly: false,
+  })
+);
 app.use(cors());
 
 // Routes

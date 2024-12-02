@@ -7,7 +7,7 @@ export const action = async ({ request }) => {
   const data = Object.fromEntries(formData);
   try {
     await customFetch.post("/auth/login", data);
-    redirect("/transaction")
+    return redirect("/transaction");
   } catch (error) {
     console.log(error);
   }
