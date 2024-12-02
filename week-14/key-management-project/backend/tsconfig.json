@@ -9,8 +9,8 @@
     "lib": ["ES2016", "DOM"],
     "forceConsistentCasingInFileNames": true,
     "typeRoots": ["node_modules/@types", "src/types"],
-    "module": "ES2020",  // Or "ES2020" or "Node16"
-    "target": "ES2020",   // Make sure to target an ES version that supports import.meta
+    "module": "ESNext",  // Or "ES2020" or "Node16"
+    "target": "ES6",   // Make sure to target an ES version that supports import.meta
     "moduleResolution": "Node"
   },
   "include": ["src/**/*"]
